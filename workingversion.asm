@@ -163,7 +163,8 @@ finished:
     
 ; -----------------------------------------------------
 ; delay subroutine
-; * reference: https://www.mycompiler.io/view/I72osPmHt3a (someone's code for checking time)
+; reference: https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md
+; syscall 162 = nanosleep, coming from the arm(32bit)/x86(32bit) tables
 ; parameter: number of seconds to delay by -> eax
 ; -----------------------------------------------------
 delaySeconds:
