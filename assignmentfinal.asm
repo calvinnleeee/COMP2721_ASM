@@ -106,58 +106,6 @@ atoi_done:
 atoi_ret:
     ret
     
-    
-; -----------------------------------------------------
-; sprint subroutine (taken from asmtutor.com, lesson 5)
-; String printing function
-; parameter: the string message -> eax
-; -----------------------------------------------------
-sprint:
-    push    edx
-    push    ecx
-    push    ebx
-    push    eax
-    call    slen
- 
-    mov     edx, eax
-    pop     eax             ; eax from stack is put back
- 
-    mov     ecx, eax
-    mov     ebx, 1
-    mov     eax, 4
-    int     80h
- 
-    pop     ebx
-    pop     ecx
-    pop     edx
-    ret
-
-;----------------------------------------------------
-; slen subroutine (taken from asmtutor.com, lesson 5)
-; String length calculation function
-; parameter: the string message -> eax
-; return: integer equal to length of string -> eax
-;----------------------------------------------------
-slen:
-    push    ebx
-    mov     ebx, eax
- 
-nextchar:
-    cmp     byte [eax], 0   ; compare the byte pointed to by EAX at this address against zero (Zero is an end of string delimiter)
-    jz      finished        ; jump (if the zero flagged has been set) to the point in the code labeled 'finished'
-    inc     eax             ; increment the address in EAX by one byte (if the zero flagged has NOT been set)
-    jmp     nextchar        ; jump to the point in the code labeled 'nextchar'
- 
-finished:
-    sub     eax, ebx        ; subtract the address in EBX from the address in EAX
-                            ; remember both registers started pointing to the same address (see line 15)
-                            ; but EAX has been incremented one byte for each character in the message string
-                            ; when you subtract one memory address from another of the same type
-                            ; the result is number of segments between them - in this case the number of bytes
-    pop     ebx
-    ret
-    
-    
 ; -----------------------------------------------------
 ; delay subroutine
 ; reference: https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md
@@ -176,4 +124,4 @@ delaySeconds:
     int     0x80
 
 delayEnd:
-    ret                            ; Return from the subroutine
+    ret                         ; Return from the subroutine
